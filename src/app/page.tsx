@@ -91,10 +91,10 @@ const Page: React.FC = () => {
 			const updatedNotes = notes.map((note) =>
 				note.id === selectedNoteId
 					? {
-							...note,
-							title: currentTitle,
-							content: currentContent,
-							lastModified: Date.now(),
+						...note,
+						title: currentTitle,
+						content: currentContent,
+						lastModified: Date.now(),
 					  }
 					: note
 			)
@@ -125,7 +125,13 @@ const Page: React.FC = () => {
 				</svg>
 			</div>
 			<aside className='aside'>
-				<NoteList notes={notes} selectedNoteId={selectedNoteId} onAddNote={handleAddNote} onSelectNote={handleSelectNote} onDeleteNote={handleDeleteNote} />
+				<NoteList
+					notes={notes}
+					selectedNoteId={selectedNoteId}
+					onAddNote={handleAddNote}
+					onSelectNote={handleSelectNote}
+					onDeleteNote={handleDeleteNote}
+				/>
 			</aside>
 			<main className='editor-preview'>
 				<h2>Editor</h2>
