@@ -127,31 +127,36 @@ const Page: React.FC = () => {
 	const [mainHeight, setMainHeight] = useState(0)
 	const [modeButtonHeight, setModeButtonHeight] = useState(0)
 
+	console.log('assideHeight: ', assideHeight)
+	console.log('mainHeight: ', mainHeight)
+	console.log('modeButtonHeight: ', modeButtonHeight)
+
 	const asside = useRef<HTMLDivElement>(null)
 	const main = useRef<HTMLDivElement>(null)
 	const modeButton = useRef<HTMLButtonElement>(null)
 
+	const [debugging, setDebugging] = useState('')
+
 	useEffect(() => {
-		if (asside.current) {
-			setAssideHeight(asside.current.clientHeight)
-		}
-		if (main.current) {
-			setMainHeight(main.current.clientHeight)
-		}
-		if (modeButton.current) {
-			setModeButtonHeight(modeButton.current.clientHeight)
-		}
+		const assideHeightValue = asside.current ? asside.current.clientHeight : 0
+		const mainHeightValue = main.current ? main.current.clientHeight : 0
+		const modeButtonHeightValue = modeButton.current ? modeButton.current.clientHeight : 0
+
+		setAssideHeight(assideHeightValue)
+		setMainHeight(mainHeightValue)
+		setModeButtonHeight(modeButtonHeightValue)
+
+		const debugInfo = `
+		  SUPPOSED HEIGHT = ${window.innerHeight}px
+	
+		  assideHeight = ${assideHeightValue}px
+		  mainHeight = ${mainHeightValue}px
+		  modeButtonHeight = ${modeButtonHeightValue}px
+	
+		  calculated = ${assideHeightValue + mainHeightValue + modeButtonHeightValue}px
+		`
+		setDebugging(debugInfo)
 	}, [])
-
-	const debugging = `
-		  SUPPOSED HEIGHT = ${window.innerHeight}PX
-
-		  assideHeight = ${assideHeight}px
-		  mainHeight = ${mainHeight}px
-		  modeButtonHeight = ${modeButtonHeight}px
-
-		  calculated = ${assideHeight + mainHeight + modeButtonHeight}px
-	  `
 
 	return (
 		<body className={`body ${isViewMode ? 'viewMode' : ''}`}>
