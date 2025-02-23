@@ -6,14 +6,14 @@ interface EditorProps {
 	onTitleChange: (newTitle: string) => void
 	onContentChange: (newContent: string) => void
 	handleSaveNote: () => void
-	placeholder: string
+	calculatedHeight: string
 }
 
-const Editor: React.FC<EditorProps> = ({ title, content, onTitleChange, onContentChange, handleSaveNote, placeholder }) => {
+const Editor: React.FC<EditorProps> = ({ title, content, onTitleChange, onContentChange, handleSaveNote, calculatedHeight }) => {
 	return (
 		<>
 			<h2 className='heading'>Editor</h2>
-			<div className='editor'>
+			<div className='editor' style={{ height: calculatedHeight}}>
 				<div className='noteTitle'>
 					Note Title:{' '}
 					<input
@@ -26,7 +26,7 @@ const Editor: React.FC<EditorProps> = ({ title, content, onTitleChange, onConten
 				</div>
 				<textarea
 					value={content}
-					placeholder={placeholder}
+					placeholder='Start writing your note...'
 					onChange={(e: ChangeEvent<HTMLTextAreaElement>) => onContentChange(e.target.value)}
 					className='editingArea'
 				/>

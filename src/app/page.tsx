@@ -123,40 +123,11 @@ const Page: React.FC = () => {
 		setShowNotes(!showNotes)
 	}
 
-	const [assideHeight, setAssideHeight] = useState(0)
-	const [mainHeight, setMainHeight] = useState(0)
-	const [modeButtonHeight, setModeButtonHeight] = useState(0)
-
-	console.log('assideHeight: ', assideHeight)
-	console.log('mainHeight: ', mainHeight)
-	console.log('modeButtonHeight: ', modeButtonHeight)
-
 	const asside = useRef<HTMLDivElement>(null)
 	const main = useRef<HTMLDivElement>(null)
 	const modeButton = useRef<HTMLButtonElement>(null)
 
-	const [debugging, setDebugging] = useState('')
-
-	useEffect(() => {
-		const assideHeightValue = asside.current ? asside.current.clientHeight : 0
-		const mainHeightValue = main.current ? main.current.clientHeight : 0
-		const modeButtonHeightValue = modeButton.current ? modeButton.current.clientHeight : 0
-
-		setAssideHeight(assideHeightValue)
-		setMainHeight(mainHeightValue)
-		setModeButtonHeight(modeButtonHeightValue)
-
-		const debugInfo = `
-		  SUPPOSED HEIGHT = ${window.innerHeight}px
-	
-		  assideHeight = ${assideHeightValue}px
-		  mainHeight = ${mainHeightValue}px
-		  modeButtonHeight = ${modeButtonHeightValue}px
-	
-		  calculated = ${assideHeightValue + mainHeightValue + modeButtonHeightValue}px
-		`
-		setDebugging(debugInfo)
-	}, [])
+	const calculatedHeight = isMobileDevice() ? `${window.innerHeight - 224}px` : '15%'
 
 	return (
 		<body className={`body ${isViewMode ? 'viewMode' : ''}`}>
@@ -237,7 +208,7 @@ const Page: React.FC = () => {
 							onTitleChange={setCurrentTitle}
 							onContentChange={setCurrentContent}
 							handleSaveNote={handleSaveNote}
-							placeholder={debugging}
+							calculatedHeight={calculatedHeight}
 						/>
 					)}
 					{isViewMode || !isMobileDevice() ? <Preview content={currentContent} /> : null}
