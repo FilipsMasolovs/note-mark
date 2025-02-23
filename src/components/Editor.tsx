@@ -6,9 +6,10 @@ interface EditorProps {
 	onTitleChange: (newTitle: string) => void
 	onContentChange: (newContent: string) => void
 	handleSaveNote: () => void
+	placeholder: string
 }
 
-const Editor: React.FC<EditorProps> = ({ title, content, onTitleChange, onContentChange, handleSaveNote }) => {
+const Editor: React.FC<EditorProps> = ({ title, content, onTitleChange, onContentChange, handleSaveNote, placeholder }) => {
 	return (
 		<>
 			<h2 className='heading'>Editor</h2>
@@ -25,7 +26,7 @@ const Editor: React.FC<EditorProps> = ({ title, content, onTitleChange, onConten
 				</div>
 				<textarea
 					value={content}
-					placeholder='Start writing your note...'
+					placeholder={placeholder}
 					onChange={(e: ChangeEvent<HTMLTextAreaElement>) => onContentChange(e.target.value)}
 					className='editingArea'
 				/>

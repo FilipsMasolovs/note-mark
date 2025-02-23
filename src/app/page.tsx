@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import NoteList from '../components/NoteList'
 import Editor from '../components/Editor'
@@ -108,10 +108,10 @@ const Page: React.FC = () => {
 			const updatedNotes = notes.map((note) =>
 				note.id === selectedNoteId
 					? {
-						...note,
-						title: currentTitle,
-						content: currentContent,
-						lastModified: Date.now(),
+							...note,
+							title: currentTitle,
+							content: currentContent,
+							lastModified: Date.now(),
 					  }
 					: note
 			)
@@ -122,6 +122,29 @@ const Page: React.FC = () => {
 	const handleShowNotes = () => {
 		setShowNotes(!showNotes)
 	}
+
+	const [assideHeight, setAssideHeight] = useState(0)
+	const asside = useRef(null)
+	const [mainHeight, setMainHeight] = useState(0)
+	const main = useRef(null)
+	const [modeButtonHeight, setModeButtonHeight] = useState(0)
+	const modeButton = useRef(null)
+
+	useEffect(() => {
+		setAssideHeight(asside.current.clientHeight)
+		setMainHeight(main.current.clientHeight)
+		setModeButtonHeight(modeButton.current.clientHeight)
+	})
+
+	const debugging = `
+		  SUPPOSED HEIGHT = ${window.innerHeight}PX
+
+		  assideHeight = ${assideHeight}px
+		  mainHeight = ${mainHeight}px
+		  modeButtonHeight = ${modeButtonHeight}px
+
+		  calculated = ${assideHeight + mainHeight + modeButtonHeight}px
+	  `
 
 	return (
 		<body className={`body ${isViewMode ? 'viewMode' : ''}`}>
@@ -183,7 +206,7 @@ const Page: React.FC = () => {
 				</div>
 			)}
 			{isViewMode ? null : (
-				<aside className='aside'>
+				<aside ref={asside} className='aside'>
 					{isMobileDevice() ? (
 						showNotes ? (
 							<MobileNoteList notes={notes} selectedNoteId={selectedNoteId} onSelectNote={handleSelectNote} onDeleteNote={handleDeleteNote} />
@@ -194,7 +217,7 @@ const Page: React.FC = () => {
 				</aside>
 			)}
 			{((isMobileDevice() && !showNotes) || !isMobileDevice()) && (
-				<main className='main'>
+				<main ref={main} className='main'>
 					{isViewMode ? null : (
 						<Editor
 							title={currentTitle}
@@ -202,12 +225,13 @@ const Page: React.FC = () => {
 							onTitleChange={setCurrentTitle}
 							onContentChange={setCurrentContent}
 							handleSaveNote={handleSaveNote}
+							placeholder={debugging}
 						/>
 					)}
 					{isViewMode || !isMobileDevice() ? <Preview content={currentContent} /> : null}
 				</main>
 			)}
-			<button className='modeButton' onClick={() => setIsViewMode(!isViewMode)}>
+			<button ref={modeButton} className='modeButton' onClick={() => setIsViewMode(!isViewMode)}>
 				{isViewMode ? 'Editing Mode' : 'View Mode'}
 			</button>
 		</body>
