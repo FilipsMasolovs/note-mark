@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styles from '../globals.module.css'
+import '../globals.css'
 
 export const metadata = {
 	title: 'NoteMark',
@@ -10,9 +10,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang='en'>
-			<body className={styles.body}>
-				{children}
-			</body>
+			<body className='body'>{children}</body>
 		</html>
 	)
 }

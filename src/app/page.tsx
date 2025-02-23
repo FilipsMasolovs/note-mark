@@ -1,4 +1,3 @@
-// src/app/page.tsx
 'use client'
 
 import React, { useEffect, useState } from 'react'
@@ -6,8 +5,6 @@ import React, { useEffect, useState } from 'react'
 import NoteList from '../components/NoteList'
 import Editor from '../components/Editor'
 import Preview from '../components/Preview'
-
-import styles from '../globals.module.css'
 
 export interface Note {
 	id: string
@@ -22,7 +19,6 @@ const Page: React.FC = () => {
 	const [currentTitle, setCurrentTitle] = useState<string>('')
 	const [currentContent, setCurrentContent] = useState<string>('')
 
-	// Load notes from localStorage when the component mounts
 	useEffect(() => {
 		const savedNotes = localStorage.getItem('notes')
 		if (savedNotes) {
@@ -36,12 +32,10 @@ const Page: React.FC = () => {
 		}
 	}, [])
 
-	// Save notes to localStorage whenever they change
 	useEffect(() => {
 		localStorage.setItem('notes', JSON.stringify(notes))
 	}, [notes])
 
-	// Create a new note and open it in the editor
 	const handleAddNote = () => {
 		const newNote: Note = {
 			id: Date.now().toString(),
@@ -56,7 +50,6 @@ const Page: React.FC = () => {
 		setCurrentContent(newNote.content)
 	}
 
-	// When a note in the sidebar is clicked, load its data into the editor
 	const handleSelectNote = (id: string) => {
 		setSelectedNoteId(id)
 		const note = notes.find((n) => n.id === id)
@@ -66,7 +59,6 @@ const Page: React.FC = () => {
 		}
 	}
 
-	// Delete a note from the state (and update the current selection if needed)
 	const handleDeleteNote = (id: string) => {
 		const updatedNotes = notes.filter((n) => n.id !== id)
 		setNotes(updatedNotes)
@@ -84,8 +76,6 @@ const Page: React.FC = () => {
 		}
 	}
 
-	// Save the current note.
-	// If no note is selected, then create a new note using the current editor data.
 	const handleSaveNote = () => {
 		if (!selectedNoteId) {
 			const newNote: Note = {
@@ -114,7 +104,7 @@ const Page: React.FC = () => {
 
 	return (
 		<>
-			<div className={styles.logo}>
+			<div className='logo'>
 				<svg width='150' height='150' viewBox='0 0 150 150' fill='none' xmlns='http://www.w3.org/2000/svg'>
 					<g clipPath='url(#clip0_4_2)'>
 						<path
@@ -134,7 +124,7 @@ const Page: React.FC = () => {
 					</defs>
 				</svg>
 			</div>
-			<aside className={styles.aside}>
+			<aside className='aside'>
 				<NoteList notes={notes} selectedNoteId={selectedNoteId} onAddNote={handleAddNote} onSelectNote={handleSelectNote} onDeleteNote={handleDeleteNote} />
 			</aside>
 			<main className='editor-preview'>
