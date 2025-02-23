@@ -108,10 +108,10 @@ const Page: React.FC = () => {
 			const updatedNotes = notes.map((note) =>
 				note.id === selectedNoteId
 					? {
-						...note,
-						title: currentTitle,
-						content: currentContent,
-						lastModified: Date.now(),
+							...note,
+							title: currentTitle,
+							content: currentContent,
+							lastModified: Date.now(),
 					  }
 					: note
 			)
@@ -124,17 +124,24 @@ const Page: React.FC = () => {
 	}
 
 	const [assideHeight, setAssideHeight] = useState(0)
-	const asside = useRef(null)
 	const [mainHeight, setMainHeight] = useState(0)
-	const main = useRef(null)
 	const [modeButtonHeight, setModeButtonHeight] = useState(0)
-	const modeButton = useRef(null)
+
+	const asside = useRef<HTMLDivElement>(null)
+	const main = useRef<HTMLDivElement>(null)
+	const modeButton = useRef<HTMLButtonElement>(null)
 
 	useEffect(() => {
-		setAssideHeight(asside.current.clientHeight)
-		setMainHeight(main.current.clientHeight)
-		setModeButtonHeight(modeButton.current.clientHeight)
-	})
+		if (asside.current) {
+			setAssideHeight(asside.current.clientHeight)
+		}
+		if (main.current) {
+			setMainHeight(main.current.clientHeight)
+		}
+		if (modeButton.current) {
+			setModeButtonHeight(modeButton.current.clientHeight)
+		}
+	}, [])
 
 	const debugging = `
 		  SUPPOSED HEIGHT = ${window.innerHeight}PX
