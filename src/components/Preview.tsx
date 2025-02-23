@@ -7,9 +7,12 @@ interface PreviewProps {
 
 const Preview: React.FC<PreviewProps> = ({ content }) => {
 	return (
-		<div className='preview'>
-			<ReactMarkdown>{content}</ReactMarkdown>
-		</div>
+		<>
+			<h2 className='heading'>Preview</h2>
+			<div className='preview'>
+				<ReactMarkdown>{content}</ReactMarkdown>
+			</div>
+		</>
 	)
 }
 

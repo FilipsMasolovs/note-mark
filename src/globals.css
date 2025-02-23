@@ -6,14 +6,15 @@
 	--sidebar-bg: #eaeaea;
 	--text-color: #333333;
 	--accent-color: #0070f3;
---border-color: #ccc;
+	--border-color: #ccc;
 	--input-bg: #ffffff;
 	--button-hover-bg: #005bb5;
 	--note-item-hover-bg: #ddd;
 	--preview-bg: #ffffff;
+
+	--button-backgroun-color: #0070f3;
+	--button-color: #ffffff;
 }
-
-
 
 .body,
 .body * {
@@ -27,6 +28,12 @@
 .body {
 	display: flex;
 	height: 100vh;
+	overflow: hidden;
+	position: relative;
+}
+
+.body.viewMode .preview {
+	height: 95%;
 }
 
 .logo {
@@ -43,12 +50,222 @@
 }
 
 .aside {
+	height: 100vh;
+	width: 15%;
 	background-color: var(--sidebar-bg);
+}
+
+.main {
+	height: 100vh;
+	width: 85%;
+}
+
+.body.viewMode .main {
+	width: 100%;
+}
+
+.heading {
+	font-size: 34px;
+	background-color: #333;
+	color: #fff;
+	height: 5%;
+	display: flex;
+	align-items: center;
+	padding: 32px;
+}
+
+.editor {
+	height: 15%;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 4px 32px;
+	margin-right: 136px;
+}
+
+.editingArea {
+	flex-grow: 1;
+	outline: none;
+	border: 1px solid black;
+	resize: none;
+}
+
+.noteTitle {
+	height: 20px;
+	display: flex;
+	gap: 4px;
+	align-items: center;
+}
+
+.noteTitleInput {
+	outline: none;
+	border: 1px solid black;
+	border-radius: 0;
+	height: 20px;
+	width: 200px;
+}
+
+.saveNote {
+	height: 20px;
+	width: 128px;
+	border-radius: 4px;
+	border: none;
+	background-color: var(--accent-color);
+	color: var(--button-color);
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.preview {
+	margin: 0 32px;
+	padding: 32px 0;
+	height: 75%;
+	overflow: hidden;
+	overflow-y: auto;
+}
+
+.modeButton {
+	position: fixed;
+	right: 32px;
+	bottom: 32px;
+	height: 32px;
+	width: 128px;
+	border-radius: 4px;
+	border: none;
+	background-color: var(--accent-color);
+	color: var(--button-color);
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.createNewNote {
+	position: absolute;
+	left: 16px;
+	top: 16px;
+	width: 48px;
+	height: 48px;
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+	transition: all 0.8s ease;
+
+	svg path {
+		transition: all 0.4s ease;
+	}
+
+	&:hover {
+		background-color: #0070f3;
+
+		svg path {
+			stroke: #fff;
+		}
+	}
+}
+
+.notes {
+	width: 100%;
+	padding: 72px 8px 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+/* --background-color: #f5f5f5;
+--editor-bg: #ffffff;
+--sidebar-bg: #eaeaea;
+--text-color: #333333;
+--accent-color: #0070f3;
+--border-color: #ccc;
+--input-bg: #ffffff;
+--button-hover-bg: #005bb5;
+--note-item-hover-bg: #ddd;
+--preview-bg: #ffffff; */
+
+.note {
+	padding: 8px 2px;
+	border-radius: 4px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	transition: all 0.8s ease;
+	background-color: #ddd;
+
+	button {
+		background-color: #ddd;
+	}
+
+	&.selected {
+		background-color: #777;
+
+		button {
+			background-color: #777;
+		}
+
+		&:hover {
+			background-color: #777;
+
+			button {
+				background-color: #777;
+			}
+		}
+	}
+
+	&:hover {
+		background-color: #aaa;
+
+		button {
+			background-color: #aaa;
+		}
+	}
+}
+
+.noteDeleteButton {
+	height: 32px;
+	width: 32px;
+	border-radius: 4px;
+	border: none;
+	cursor: pointer;
+	transition: all 0.8s ease;
+
+	svg path {
+		transition: all 0.4s ease;
+	}
+
+	&:hover {
+		background-color: #0070f3 !important;
+
+		svg path {
+			stroke: #fff;
+		}
+	}
 }
 
 @media only screen and (hover: none) and (pointer: coarse) {
 	.body {
 		flex-direction: column;
+	}
+
+	.aside,
+	.main {
+		width: 100%;
+	}
+
+	.main {
+		height: calc(100vh - 96px);
+	}
+
+	.body.viewMode .main {
+		height: calc(100vh - 32px);
+	}
+
+	.heading {
+		height: 2%;
+	}
+
+	.body.viewMode .preview {
+		height: calc(100vh - 128px);
+		padding: 0;
 	}
 
 	.logo {
@@ -60,5 +277,20 @@
 
 	.aside {
 		height: 96px;
+	}
+
+	.preview,
+	.editor {
+		margin: 16px;
+	}
+
+	.modeButton {
+		right: 0;
+		bottom: 0;
+		left: 0;
+		height: 32px;
+		border-bottom-right-radius: 0;
+		border-bottom-left-radius: 0;
+		width: 100%;
 	}
 }
