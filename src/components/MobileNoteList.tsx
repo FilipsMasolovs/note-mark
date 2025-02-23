@@ -9,9 +9,10 @@ interface NoteListProps {
 	onDeleteNote: (id: string) => void
 }
 
-const NoteList: React.FC<NoteListProps> = ({ notes, selectedNoteId, onSelectNote, onDeleteNote }) => {
+const MobileNoteList: React.FC<NoteListProps> = ({ notes, selectedNoteId, onSelectNote, onDeleteNote }) => {
 	return (
-		<>
+		<div className='mobileNoteList'>
+			<h2 className='heading'>Note List</h2>
 			<ul className='notes'>
 				{notes.map((note) => (
 					<li key={note.id} className={`note ${note.id === selectedNoteId ? 'selected' : ''}`} onClick={() => onSelectNote(note.id)}>
@@ -41,8 +42,8 @@ const NoteList: React.FC<NoteListProps> = ({ notes, selectedNoteId, onSelectNote
 					</li>
 				))}
 			</ul>
-		</>
+		</div>
 	)
 }
 
-export default NoteList
+export default MobileNoteList
