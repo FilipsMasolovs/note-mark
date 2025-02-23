@@ -1,0 +1,96 @@
+.noteItem {
+	padding: var(--spacing-md);
+	margin: var(--spacing-xs) var(--spacing-sm);
+	border-radius: var(--border-radius-md);
+	background-color: var(--background-light);
+	cursor: pointer;
+	transition: all 0.2s ease;
+	border: 1px solid var(--border-main);
+	position: relative;
+
+	&.mobile {
+		padding: var(--spacing-lg);
+		margin: var(--spacing-xs) var(--spacing-xs);
+
+		.noteTitle {
+			font-size: var(--font-size-xl);
+			margin-bottom: var(--spacing-sm);
+		}
+
+		.notePreview {
+			font-size: var(--font-size-md);
+		}
+
+		.noteDate {
+			font-size: var(--font-size-sm);
+		}
+
+		.deleteButton {
+			width: 44px;
+			height: 44px;
+			opacity: 1;
+			position: absolute;
+			right: var(--spacing-sm);
+			top: 50%;
+			transform: translateY(-50%);
+		}
+	}
+
+	&:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	}
+
+	&.selected {
+		background-color: var(--primary-color);
+		color: white;
+
+		.notePreview,
+		.noteDate {
+			color: rgba(255, 255, 255, 0.8);
+		}
+	}
+}
+
+.noteContent {
+	.noteTitle {
+		font-size: var(--font-size-lg);
+		margin-bottom: var(--spacing-xs);
+		font-weight: 500;
+	}
+
+	.notePreview {
+		font-size: var(--font-size-sm);
+		color: var(--text-light);
+		margin-bottom: var(--spacing-xs);
+		opacity: 0.8;
+	}
+
+	.noteDate {
+		font-size: var(--font-size-xs);
+		color: var(--text-light);
+		opacity: 0.6;
+	}
+}
+
+.deleteButton {
+	opacity: 0;
+	transition: opacity 0.2s ease;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: var(--spacing-xs);
+	border-radius: var(--border-radius-sm);
+
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.1);
+	}
+
+	.noteItem:hover & {
+		opacity: 1;
+	}
+
+	svg {
+		display: block;
+	}
+}

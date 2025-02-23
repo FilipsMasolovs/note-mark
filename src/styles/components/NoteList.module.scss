@@ -1,0 +1,75 @@
+.noteListContainer {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	background-color: var(--background-main);
+	border-right: 1px solid var(--border-main);
+
+	.searchBar {
+		padding: var(--spacing-md);
+		border-bottom: 1px solid var(--border-main);
+
+		input {
+			width: 100%;
+			padding: var(--spacing-sm);
+			border: 1px solid var(--border-main);
+			border-radius: var(--border-radius-sm);
+			font-size: var(--font-size-md);
+		}
+	}
+
+	.notesList {
+		flex: 1;
+		overflow-y: auto;
+		padding: var(--spacing-sm);
+		list-style: none;
+
+		@media (max-width: 768px) {
+			margin-top: 120px;
+		}
+	}
+}
+
+.noteItem {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: var(--spacing-md);
+	margin-bottom: var(--spacing-sm);
+	border-radius: var(--border-radius-sm);
+	background-color: var(--background-light);
+	transition: var(--transition-fast);
+	cursor: pointer;
+
+	&:hover {
+		background-color: var(--primary-color);
+		color: var(--text-dark);
+	}
+
+	&.selected {
+		background-color: var(--primary-color);
+		color: var(--text-dark);
+	}
+
+	.noteContent {
+		flex: 1;
+		margin-right: var(--spacing-md);
+
+		.noteTitle {
+			font-size: var(--font-size-md);
+			margin-bottom: var(--spacing-xs);
+		}
+
+		.notePreview {
+			font-size: var(--font-size-sm);
+			color: var(--text-light);
+			opacity: 0.8;
+		}
+
+		.noteDate {
+			font-size: var(--font-size-sm);
+			color: var(--text-light);
+			opacity: 0.6;
+		}
+	}
+}

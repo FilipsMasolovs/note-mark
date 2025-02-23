@@ -1,0 +1,43 @@
+.previewContainer {
+	padding: var(--spacing-md);
+	background-color: var(--background-main);
+	color: var(--text-main);
+	overflow-y: auto;
+	height: 100%;
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		margin-bottom: var(--spacing-md);
+		color: var(--text-main);
+	}
+
+	p {
+		margin-bottom: var(--spacing-md);
+		line-height: 1.6;
+	}
+
+	code {
+		background-color: var(--background-dark);
+		color: var(--text-dark);
+		padding: var(--spacing-xs) var(--spacing-sm);
+		border-radius: var(--border-radius-sm);
+	}
+
+	pre {
+		margin: var(--spacing-md) 0;
+		border-radius: var(--border-radius-md);
+		overflow-x: auto;
+	}
+
+	blockquote {
+		border-left: 4px solid var(--primary-color);
+		padding-left: var(--spacing-md);
+		margin: var(--spacing-md) 0;
+		color: var(--text-main);
+		opacity: 0.8;
+	}
+}
