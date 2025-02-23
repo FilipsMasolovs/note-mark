@@ -108,10 +108,10 @@ const Page: React.FC = () => {
 			const updatedNotes = notes.map((note) =>
 				note.id === selectedNoteId
 					? {
-							...note,
-							title: currentTitle,
-							content: currentContent,
-							lastModified: Date.now(),
+						...note,
+						title: currentTitle,
+						content: currentContent,
+						lastModified: Date.now(),
 					  }
 					: note
 			)
