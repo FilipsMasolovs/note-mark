@@ -1,10 +1,11 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
+// src/store/noteStore.ts
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { Note } from '../types'
-import { LOCAL_STORAGE_KEYS, DEFAULT_NOTE } from '../constants'
+import { LOCAL_STORAGE_KEYS, FIRST_NOTE, DEFAULT_NOTE } from '../constants'
 
 interface NoteState {
 	notes: Note[]
@@ -16,13 +17,14 @@ interface NoteState {
 	deleteNote: (id: string) => void
 	selectNote: (id: string) => void
 	setSearchTerm: (term: string) => void
+	toggleTheme: () => void
 }
 
 export const useNoteStore = create(
 	persist<NoteState>(
 		(set) => ({
-			notes: [],
-			selectedNoteId: null,
+			notes: [FIRST_NOTE],
+			selectedNoteId: FIRST_NOTE.id,
 			searchTerm: '',
 			isDarkMode: false,
 
@@ -62,6 +64,10 @@ export const useNoteStore = create(
 
 			setSearchTerm: (term) => {
 				set({ searchTerm: term })
+			},
+
+			toggleTheme: () => {
+				set((state) => ({ isDarkMode: !state.isDarkMode }))
 			},
 		}),
 		{
