@@ -31,3 +31,9 @@
 		resize: none;
 	}
 }
+
+@media only screen and (hover: none) and (pointer: coarse) {
+	.editorContainer {
+		height: 100%;
+	}
+}

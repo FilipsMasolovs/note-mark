@@ -1,7 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-// src/store/noteStore.ts
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { Note } from '../types'

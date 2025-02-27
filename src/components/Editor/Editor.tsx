@@ -11,7 +11,7 @@ export const Editor: React.FC<EditorProps> = ({ note, onUpdate }) => {
 	useEffect(() => {
 		setTitle(note.title)
 		setContent(note.content)
-	}, [note.id])
+	}, [note.content, note.id, note.title])
 
 	const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setTitle(e.target.value)

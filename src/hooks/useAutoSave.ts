@@ -30,7 +30,7 @@ export const useAutoSave = (value: unknown, onSave: () => void, delay: number = 
 		return () => {
 			debouncedSave.cancel()
 		}
-	}, [value])
+	}, [debouncedSave, value])
 
 	return saveState
 }
